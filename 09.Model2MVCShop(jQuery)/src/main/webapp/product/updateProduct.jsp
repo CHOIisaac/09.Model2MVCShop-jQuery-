@@ -11,10 +11,37 @@ Product vo = (Product)request.getAttribute("product");
 <meta charset="EUC-KR">
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
 <title>상품 정보 수정</title>
+
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="../javascript/calendar.js">
+	
+	
+	
+	function fncUpdateProduct(){
+		
+		
+		
+		//document.detailForm.action='/product/updateProduct';	
+		//document.detailForm.submit();
+		$("form").attr("method" , "POST").attr("action" , "/product/updateProduct").submit();
+	}
+
+		$(function(){
+			 $( "td.ct_btn01:contains('수정')" ).on("click" , function() {
+				 fncUpdateProduct();
+			 });
+		});
+
+		$(function(){
+			 $( "td.ct_btn01:contains('취소')" ).on("click" , function() {
+				 history.go(-1);
+			 });
+		});
+	</script>
 </head>
 <body bgcolor="#ffffff" text="#000000">
 
-	<form name="detailForm"  method="post" >
+	<form name="detailForm"  >
 	
 	<input type="hidden" name="prodNo" value="${product.prodNo }">
 	
@@ -73,6 +100,8 @@ Product vo = (Product)request.getAttribute("product");
 			<td class="ct_write01">
 				<input type="text" name="manuDate" value="${product.manuDate }" class="ct_input_g" 
 							style="width:100px; height:19px"  maxLength="50" >
+							<img src="../images/ct_icon_date.gif" width="15" height="15" 
+										onclick="show_calendar('document.detailForm.manuDate', document.detailForm.manuDate.value)"/>
 			</td>
 		</tr>
 		<tr>
@@ -112,7 +141,9 @@ Product vo = (Product)request.getAttribute("product");
 							<img src="/images/ct_btnbg01.gif" width="17" height="23">
 						</td>
 						<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-							<a href="javascript:fncUpdateUser();">수정</a>
+							<!-- <a href="javascript:fncUpdateUser();">
+							</a>-->
+							수정
 						</td>
 						<td width="14" height="23">
 							<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
@@ -122,7 +153,9 @@ Product vo = (Product)request.getAttribute("product");
 							<img src="/images/ct_btnbg01.gif" width="17" height="23">
 						</td>
 						<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-							<a href="javascript:resetData();">취소</a>
+							<!--  <a href="javascript:resetData();">
+							</a>-->
+							취소
 						</td>
 						<td width="14" height="23">
 							<img src="/images/ct_btnbg03.gif" width="14" height="23">
@@ -136,17 +169,3 @@ Product vo = (Product)request.getAttribute("product");
 </body>
 </html>
 
-<script>
-function fncUpdateUser(){
-	
-	var name=$("input[name='prodNo']").val();
-	
-	if(name == null || name.length <1){
-		alert("이름은  반드시 입력하셔야 합니다.");
-		return;
-	}
-	
-	document.detailForm.action='/updateProduct';	
-	document.detailForm.submit();
-}
-</script>
