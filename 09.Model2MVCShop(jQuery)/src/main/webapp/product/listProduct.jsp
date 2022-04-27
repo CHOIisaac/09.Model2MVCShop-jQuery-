@@ -49,8 +49,8 @@ $(function() {
         //alert(  $( this ).text().trim() );
         if(${param.menu == 'manage'}) {
            self.location ="/product/updateProductView?prodNo="+prodNo+"&menu=manage";
-        }else {
-           self.location ="/product/readProduct?prodNo="+prodNo+"&menu=search";
+        }else if(${param.menu == 'search'}){
+           self.location ="/product/getProduct?prodNo="+prodNo+"&menu=search";
         }
         
   });
