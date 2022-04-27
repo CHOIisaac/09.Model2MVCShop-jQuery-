@@ -28,13 +28,35 @@ String menu = request.getParameter("menu");
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
-<!--
+
 function fncGetUserList(currentPage) {
 	//document.getElementById("currentPage").value = currentPage;
 	$("#currentPage").val(currentPage)
-   	document.detailForm.submit();		
+   //	document.detailForm.submit();	
+	$("form").attr("method" , "POST").attr("action" , "/user/listProduct=${menu}").submit();
 }
--->
+
+$(function() {
+	$( "td.ct_btn01:contains('검색')" ).on("click" , function() {
+		//Debug..
+		//alert(  $( "td.ct_btn01:contains('검색')" ).html() );
+		fncGetUserList(1);
+});
+	
+	$( ".ct_list_pop td:nth-child(3)" ).on("click" , function() {
+        var prodNo = $(this).data("param");
+        //Debug..
+        //alert(  $( this ).text().trim() );
+        if(${param.menu == 'manage'}) {
+           self.location ="/product/updateProductView?prodNo="+prodNo+"&menu=manage";
+        }else {
+           self.location ="/product/readProduct?prodNo="+prodNo+"&menu=search";
+        }
+        
+  });
+	  $( ".ct_list_pop td:nth-child(3)" ).css("color" , "red");
+      $("h7").css("color" , "red");
+  });
 </script>
 </head>
 
@@ -96,7 +118,9 @@ function fncGetUserList(currentPage) {
 						<img src="/images/ct_btnbg01.gif" width="17" height="23">
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top:3px;">
-						<a href="javascript:fncGetUserList('1');">검색</a>
+						<!--  <a href="javascript:fncGetUserList('1');">
+						</a>-->
+						검색
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23">
@@ -168,13 +192,13 @@ function fncGetUserList(currentPage) {
 		<tr class="ct_list_pop">
 			<td align="center">${ i }</td>
 			<td></td>
-			<td align="left">
-			<c:if test="${param.menu == 'search'}">
+			<td align="left" data-param="${product.prodNo}">
+			<!-- <c:if test="${param.menu == 'search'}">
 				<a href="/product/getProduct?prodNo=${product.prodNo}">${product.prodName}</a>
 			</c:if>
 			<c:if test="${param.menu == 'manage'}">
 				<a href="/product/updateProductView?prodNo=${product.prodNo}">${product.prodName}</a>
-			</c:if>
+			</c:if>-->${product.prodName}
 				</td>
 			<td></td>
 			<td align="left">${product.price}</td>

@@ -68,7 +68,7 @@ public class ProductRestController {
 	}
 	
 	@RequestMapping(value="json/updateProduct/{prodNo}", method=RequestMethod.GET)
-	public Product updateProductView( @RequestBody int prodNo , Model model ) throws Exception{
+	public Product updateProductView( @PathVariable int prodNo , Model model ) throws Exception{
 
 		System.out.println("/updateUserView");
 		//Business Logic

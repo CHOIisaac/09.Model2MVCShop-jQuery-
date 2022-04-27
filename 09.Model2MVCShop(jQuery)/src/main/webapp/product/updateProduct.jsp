@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- 
 <%
 Product vo = (Product)request.getAttribute("product");
@@ -13,8 +14,8 @@ Product vo = (Product)request.getAttribute("product");
 <title>상품 정보 수정</title>
 
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script type="text/javascript" src="../javascript/calendar.js">
-	
+<script type="text/javascript" src="../javascript/calendar.js"></script>
+<script type="text/javascript">
 	
 	
 	function fncUpdateProduct(){
@@ -23,9 +24,9 @@ Product vo = (Product)request.getAttribute("product");
 		
 		//document.detailForm.action='/product/updateProduct';	
 		//document.detailForm.submit();
+
 		$("form").attr("method" , "POST").attr("action" , "/product/updateProduct").submit();
 	}
-
 		$(function(){
 			 $( "td.ct_btn01:contains('수정')" ).on("click" , function() {
 				 fncUpdateProduct();

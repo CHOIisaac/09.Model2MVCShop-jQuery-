@@ -70,10 +70,10 @@ public class ProductController {
 		// Model °ú View ¿¬°á
 		model.addAttribute("product", product);
 		
-		return "forward:/product/readProduct.jsp";
+		return "forward:/product/getProduct.jsp";
 	}
 	
-	@RequestMapping(value="updateProductView")
+	@RequestMapping(value="updateProductView", method=RequestMethod.GET)
 	public String updateProductView( @RequestParam("prodNo") int prodNo , Model model ) throws Exception{
 
 		System.out.println("/updateUserView");
@@ -85,7 +85,7 @@ public class ProductController {
 		return "forward:/product/updateProduct.jsp";
 	}
 	
-	@RequestMapping(value="updateProduct")
+	@RequestMapping(value="updateProduct",method=RequestMethod.POST)
 	public String updateProduct( @ModelAttribute("product") Product product , Model model) throws Exception{
 
 		System.out.println("/updateProduct");
@@ -93,7 +93,7 @@ public class ProductController {
 		productService.updateProduct(product);
 		
 		
-		return "redirect:/getProduct?prodNo="+product.getProdNo();
+		return "redirect:/product/getProduct?prodNo="+product.getProdNo();
 	}
 	
 	@RequestMapping(value="listProduct")
